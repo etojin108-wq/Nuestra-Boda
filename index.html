@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta
+    name="description"
+    content="Edgar & Leticia — Nuestra Boda · 11 de octubre de 2026"
+  >
+
+  <meta name="theme-color" content="#f8f8f5">
+
+  <title>Edgar & Leticia | Nuestra Boda</title>
+
+  <style>
+
+    /* =====================================================
+       CONFIGURACIÓN GENERAL
+       ===================================================== */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #f8f8f5;
+      color: #4d5549;
+      font-family: Georgia, "Times New Roman", serif;
+      overflow-x: hidden;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+
+    /* =====================================================
+       CONTENEDOR PRINCIPAL
+       ===================================================== */
+
+    .invitation {
+      position: relative;
+
+      width: 100%;
+      min-height: 100svh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      overflow: hidden;
+
+      background-color: #fafaf8;
+
+      /*
+        Tu imagen floral.
+        Debe estar en la misma carpeta que index.html
+        con el nombre flores.png
+      */
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,0.08),
+          rgba(255,255,255,0.08)
+        ),
+        url("flores.png");
+
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+
+    /* =====================================================
+       CAPA SUAVE PARA INTEGRAR LAS FLORES
+       ===================================================== */
+
+    .soft-overlay {
+      position: absolute;
+      inset: 0;
+
+      background:
+        radial-gradient(
+          ellipse at center,
+          rgba(255,255,255,0.18) 0%,
+          rgba(255,255,255,0.05) 50%,
+          rgba(255,255,255,0.10) 100%
+        );
+
+      pointer-events: none;
+    }
+
+
+    /* =====================================================
+       CONTENIDO CENTRAL
+       ===================================================== */
+
+    .content {
+      position: relative;
+      z-index: 2;
+
+      width: min(88%, 480px);
+
+      min-height: 100svh;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      padding:
+        max(45px, env(safe-area-inset-top))
+        24px
+        max(45px, env(safe-area-inset-bottom));
+
+      animation: appear 1.5s ease both;
+    }
+
+
+    /* =====================================================
+       TEXTO SUPERIOR
+       ===================================================== */
+
+    .eyebrow {
+      font-family:
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      font-size: 11px;
+
+      letter-spacing: 4px;
+
+      text-transform: uppercase;
+
+      color: #72796e;
+
+      margin-bottom: 25px;
+
+      font-weight: 400;
+    }
+
+
+    /* =====================================================
+       NOMBRES
+       ===================================================== */
+
+    .names {
+      color: #4f594d;
+
+      font-weight: 400;
+
+      line-height: 0.95;
+
+      font-size: clamp(47px, 14vw, 76px);
+
+      letter-spacing: -2px;
+
+      margin-bottom: 15px;
+    }
+
+    .names .and {
+      display: block;
+
+      font-family:
+        "Times New Roman",
+        Georgia,
+        serif;
+
+      font-size: 0.42em;
+
+      font-style: italic;
+
+      letter-spacing: 0;
+
+      color: #9aa18f;
+
+      margin: 7px 0;
+    }
+
+
+    /* =====================================================
+       FRASE
+       ===================================================== */
+
+    .subtitle {
+      font-family:
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      text-transform: uppercase;
+
+      letter-spacing: 4px;
+
+      font-size: 10px;
+
+      color: #737a70;
+
+      margin-top: 15px;
+
+      margin-bottom: 35px;
+    }
+
+
+    /* =====================================================
+       DIVISOR
+       ===================================================== */
+
+    .divider {
+      width: 55px;
+      height: 1px;
+
+      background: rgba(91, 102, 84, 0.35);
+
+      margin-bottom: 28px;
+    }
+
+
+    /* =====================================================
+       FECHA
+       ===================================================== */
+
+    .date {
+      font-size: clamp(23px, 6vw, 32px);
+
+      letter-spacing: 5px;
+
+      color: #56604f;
+
+      font-weight: 400;
+
+      margin-bottom: 12px;
+    }
+
+
+    /* =====================================================
+       UBICACIÓN
+       ===================================================== */
+
+    .location {
+      font-family:
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      font-size: 12px;
+
+      letter-spacing: 2px;
+
+      color: #737a70;
+
+      text-transform: uppercase;
+
+      margin-bottom: 36px;
+    }
+
+
+    /* =====================================================
+       BOTÓN PRINCIPAL
+       ===================================================== */
+
+    .calendar-button {
+
+      position: relative;
+
+      display: inline-flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      width: min(100%, 290px);
+
+      min-height: 56px;
+
+      padding: 15px 25px;
+
+      border-radius: 100px;
+
+      border: 1px solid rgba(76, 88, 72, 0.55);
+
+      background: rgba(255,255,255,0.72);
+
+      color: #4f594d;
+
+      text-decoration: none;
+
+      font-family:
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      font-size: 11px;
+
+      font-weight: 500;
+
+      letter-spacing: 2.5px;
+
+      text-transform: uppercase;
+
+      backdrop-filter: blur(7px);
+
+      -webkit-backdrop-filter: blur(7px);
+
+      box-shadow:
+        0 8px 25px rgba(70,80,65,0.08);
+
+      transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .calendar-button:hover {
+      transform: translateY(-2px);
+
+      background: rgba(255,255,255,0.92);
+
+      box-shadow:
+        0 12px 30px rgba(70,80,65,0.12);
+    }
+
+    .calendar-button:active {
+      transform: scale(0.97);
+    }
+
+
+    /* =====================================================
+       MENÚ DE CALENDARIOS
+       ===================================================== */
+
+    .calendar-options {
+
+      width: min(100%, 290px);
+
+      margin-top: 14px;
+
+      display: none;
+
+      flex-direction: column;
+
+      gap: 9px;
+
+      animation: slideUp 0.35s ease both;
+    }
+
+    .calendar-options.visible {
+      display: flex;
+    }
+
+    .calendar-option {
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      min-height: 48px;
+
+      padding: 12px 18px;
+
+      border-radius: 50px;
+
+      background: rgba(255,255,255,0.65);
+
+      border: 1px solid rgba(76,88,72,0.20);
+
+      color: #5c6557;
+
+      text-decoration: none;
+
+      font-family:
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      font-size: 10px;
+
+      letter-spacing: 1.8px;
+
+      text-transform: uppercase;
+
+      backdrop-filter: blur(6px);
+
+      -webkit-backdrop-filter: blur(6px);
+
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .calendar-option:hover {
+      background: rgba(255,255,255,0.90);
+
+      transform: translateY(-1px);
+    }
+
+
+    /* =====================================================
+       TEXTO INFERIOR
+       ===================================================== */
+
+    .footer-text {
+
+      margin-top: 35px;
+
+      font-family:
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      font-size: 9px;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+
+      color: rgba(85,95,80,0.65);
+    }
+
+
+    /* =====================================================
+       ANIMACIONES
+       ===================================================== */
+
+    @keyframes appear {
+
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+    @keyframes slideUp {
+
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+
+    /* =====================================================
+       PANTALLAS PEQUEÑAS
+       ===================================================== */
+
+    @media (max-height: 700px) {
+
+      .content {
+        padding-top: 35px;
+        padding-bottom: 35px;
+      }
+
+      .eyebrow {
+        margin-bottom: 15px;
+      }
+
+      .names {
+        font-size: 48px;
+      }
+
+      .subtitle {
+        margin-bottom: 20px;
+      }
+
+      .divider {
+        margin-bottom: 18px;
+      }
+
+      .location {
+        margin-bottom: 20px;
+      }
+
+      .footer-text {
+        margin-top: 20px;
+      }
+
+    }
+
+
+    /* =====================================================
+       PANTALLAS GRANDES
+       ===================================================== */
+
+    @media (min-width: 700px) {
+
+      .content {
+        width: 500px;
+      }
+
+      .invitation {
+        min-height: 100vh;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <main class="invitation">
+
+    <div class="soft-overlay"></div>
+
+
+    <section class="content">
+
+      <div class="eyebrow">
+        Con alegría en nuestros corazones
+      </div>
+
+
+      <h1 class="names">
+
+        Edgar
+
+        <span class="and">&amp;</span>
+
+        Leticia
+
+      </h1>
+
+
+      <div class="subtitle">
+        Nuestra Boda
+      </div>
+
+
+      <div class="divider"></div>
+
+
+      <div class="date">
+        11 · 10 · 2026
+      </div>
+
+
+      <div class="location">
+        San Antonio Ilotenango
+      </div>
+
+
+      <!-- BOTÓN PRINCIPAL -->
+
+      <button
+        class="calendar-button"
+        id="calendarButton"
+        type="button"
+      >
+
+        <span id="calendarButtonText">
+          Agendar fecha
+        </span>
+
+      </button>
+
+
+      <!-- OPCIONES -->
+
+      <div
+        class="calendar-options"
+        id="calendarOptions"
+      >
+
+        <a
+          class="calendar-option"
+          id="appleCalendar"
+          href="evento.ics"
+          download="Nuestra-Boda-Edgar-y-Leticia.ics"
+        >
+           Apple Calendar
+        </a>
+
+
+        <a
+          class="calendar-option"
+          id="googleCalendar"
+          href="#"
+          target="_blank"
+          rel="noopener"
+        >
+          📅 Google Calendar
+        </a>
+
+      </div>
+
+
+      <div class="footer-text">
+        Guarda la fecha
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    /* =====================================================
+       DATOS DEL EVENTO
+       ===================================================== */
+
+    const eventTitle = "Nuestra Boda";
+
+    const eventLocation = "San Antonio Ilotenango";
+
+    /*
+      Google Calendar utiliza:
+
+      20261011T000000
+      =
+      11 octubre 2026
+
+      Como es un evento de TODO EL DÍA,
+      usamos el día siguiente como final.
+    */
+
+    const googleStart = "20261011";
+
+    const googleEnd = "20261012";
+
+
+    /* =====================================================
+       ELEMENTOS
+       ===================================================== */
+
+    const calendarButton =
+      document.getElementById("calendarButton");
+
+    const calendarButtonText =
+      document.getElementById("calendarButtonText");
+
+    const calendarOptions =
+      document.getElementById("calendarOptions");
+
+    const googleCalendar =
+      document.getElementById("googleCalendar");
+
+
+    /* =====================================================
+       DETECTAR DISPOSITIVO
+       ===================================================== */
+
+    const userAgent =
+      navigator.userAgent ||
+      navigator.vendor ||
+      window.opera;
+
+    const isIOS =
+      /iPad|iPhone|iPod/.test(userAgent) ||
+      (
+        navigator.platform === "MacIntel" &&
+        navigator.maxTouchPoints > 1
+      );
+
+    const isAndroid =
+      /Android/i.test(userAgent);
+
+
+    /* =====================================================
+       CREAR ENLACE GOOGLE CALENDAR
+       ===================================================== */
+
+    const googleCalendarURL =
+      "https://calendar.google.com/calendar/render" +
+      "?action=TEMPLATE" +
+      "&text=" + encodeURIComponent(eventTitle) +
+      "&dates=" + googleStart + "/" + googleEnd +
+      "&location=" + encodeURIComponent(eventLocation) +
+      "&sf=true" +
+      "&output=1";
+
+
+    googleCalendar.href = googleCalendarURL;
+
+
+    /* =====================================================
+       BOTÓN PRINCIPAL
+       ===================================================== */
+
+    calendarButton.addEventListener("click", function() {
+
+      calendarOptions.classList.toggle("visible");
+
+
+      if (calendarOptions.classList.contains("visible")) {
+
+        if (isIOS) {
+
+          calendarButtonText.textContent =
+            "Elegir calendario";
+
+        }
+
+        else if (isAndroid) {
+
+          calendarButtonText.textContent =
+            "Elegir calendario";
+
+        }
+
+        else {
+
+          calendarButtonText.textContent =
+            "Elegir calendario";
+
+        }
+
+      }
+
+      else {
+
+        calendarButtonText.textContent =
+          "Agendar fecha";
+
+      }
+
+    });
+
+
+    /* =====================================================
+       ENFOQUE ESPECIAL PARA IPHONE
+       ===================================================== */
+
+    if (isIOS) {
+
+      document.getElementById("appleCalendar")
+        .style.order = "-1";
+
+      document.getElementById("appleCalendar")
+        .innerHTML = " Añadir a Apple Calendar";
+
+    }
+
+
+    /* =====================================================
+       ENFOQUE ESPECIAL PARA ANDROID
+       ===================================================== */
+
+    if (isAndroid) {
+
+      document.getElementById("googleCalendar")
+        .style.order = "-1";
+
+      document.getElementById("googleCalendar")
+        .innerHTML = "📅 Añadir a Google Calendar";
+
+    }
+
+
+  </script>
+
+</body>
+</html>
