@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Edgar & Leticia | Cuenta Regresiva</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background: #f7f4ef;
+      color: #3f3a35;
+
+      font-family: "Georgia", "Times New Roman", serif;
+    }
+
+    .contenedor {
+      width: 100%;
+      max-width: 520px;
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 35px 25px;
+    }
+
+    .tarjeta {
+      width: 100%;
+      text-align: center;
+    }
+
+    .pequeno {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+      color: #81786f;
+    }
+
+    .nombres {
+      font-size: clamp(42px, 11vw, 65px);
+      font-weight: normal;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .ampersand {
+      font-size: 28px;
+      font-style: italic;
+      margin: 8px 0;
+      color: #81786f;
+    }
+
+    .fecha {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #81786f;
+      margin-bottom: 55px;
+    }
+
+    .titulo {
+      font-size: 19px;
+      font-weight: normal;
+      letter-spacing: 1px;
+      margin-bottom: 25px;
+    }
+
+    .contador {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin: 0 auto 45px;
+      max-width: 430px;
+    }
+
+    .unidad {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .numero {
+      font-family: Arial, sans-serif;
+      font-size: clamp(30px, 8vw, 45px);
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .etiqueta {
+      font-family: Arial, sans-serif;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #81786f;
+    }
+
+    .linea {
+      width: 45px;
+      height: 1px;
+      background: #bdb5ab;
+      margin: 0 auto 28px;
+    }
+
+    .mensaje {
+      font-size: 15px;
+      font-style: italic;
+      line-height: 1.7;
+      color: #6d665f;
+    }
+
+    .hoy {
+      display: none;
+      font-size: 24px;
+      line-height: 1.5;
+      margin-bottom: 35px;
+    }
+
+    @media (max-width: 380px) {
+
+      .contador {
+        gap: 3px;
+      }
+
+      .numero {
+        font-size: 27px;
+      }
+
+      .etiqueta {
+        font-size: 8px;
+        letter-spacing: 1px;
+      }
+
+      .nombres {
+        font-size: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="contenedor">
+
+    <section class="tarjeta">
+
+      <div class="pequeno">
+        Nuestra boda
+      </div>
+
+      <h1 class="nombres">
+        Edgar
+        <div class="ampersand">&amp;</div>
+        Leticia
+      </h1>
+
+      <div class="fecha">
+        15 · Noviembre · 2026
+      </div>
+
+      <div class="titulo">
+        Falta muy poco para nuestro gran día
+      </div>
+
+      <div id="contador" class="contador">
+
+        <div class="unidad">
+          <div id="dias" class="numero">00</div>
+          <div class="etiqueta">Días</div>
+        </div>
+
+        <div class="unidad">
+          <div id="horas" class="numero">00</div>
+          <div class="etiqueta">Horas</div>
+        </div>
+
+        <div class="unidad">
+          <div id="minutos" class="numero">00</div>
+          <div class="etiqueta">Minutos</div>
+        </div>
+
+        <div class="unidad">
+          <div id="segundos" class="numero">00</div>
+          <div class="etiqueta">Segundos</div>
+        </div>
+
+      </div>
+
+      <div id="mensajeHoy" class="hoy">
+        ✨ Hoy es el gran día ✨
+      </div>
+
+      <div class="linea"></div>
+
+      <p class="mensaje">
+        Estamos contando los días para compartir
+        este momento tan especial contigo.
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    /*
+      FECHA DE LA BODA
+
+      Año: 2026
+      Mes: noviembre = 10
+      Día: 15
+
+      Hora: 00:00
+
+      Si quieres cambiar la hora posteriormente,
+      modifica la última parte.
+    */
+
+    const fechaBoda = new Date(
+      "2026-11-15T00:00:00-06:00"
+    ).getTime();
+
+
+    function actualizarCuentaRegresiva() {
+
+      const ahora = new Date().getTime();
+
+      const diferencia = fechaBoda - ahora;
+
+
+      /*
+        Si ya llegó la fecha de la boda
+      */
+
+      if (diferencia <= 0) {
+
+        document.getElementById("contador").style.display = "none";
+
+        document.getElementById("mensajeHoy").style.display = "block";
+
+        return;
+      }
+
+
+      /*
+        Cálculo del tiempo restante
+      */
+
+      const dias = Math.floor(
+        diferencia / (1000 * 60 * 60 * 24)
+      );
+
+      const horas = Math.floor(
+        (diferencia % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+      );
+
+      const minutos = Math.floor(
+        (diferencia % (1000 * 60 * 60))
+        / (1000 * 60)
+      );
+
+      const segundos = Math.floor(
+        (diferencia % (1000 * 60))
+        / 1000
+      );
+
+
+      /*
+        Mostrar números
+      */
+
+      document.getElementById("dias").textContent =
+        String(dias).padStart(2, "0");
+
+      document.getElementById("horas").textContent =
+        String(horas).padStart(2, "0");
+
+      document.getElementById("minutos").textContent =
+        String(minutos).padStart(2, "0");
+
+      document.getElementById("segundos").textContent =
+        String(segundos).padStart(2, "0");
+    }
+
+
+    /*
+      Ejecutar inmediatamente
+    */
+
+    actualizarCuentaRegresiva();
+
+
+    /*
+      Actualizar cada segundo
+    */
+
+    setInterval(actualizarCuentaRegresiva, 1000);
+
+  </script>
+
+</body>
+</html>
